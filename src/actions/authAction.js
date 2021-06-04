@@ -17,7 +17,7 @@ export const registerUser = (data, history) => (dispatch) => {
           type: "alert-success",
         })
       );
-      return history.push("/profile");
+      return history.push("/dashboard");
     })
     .catch((err) => {
       dispatch(errorHandler(err));
@@ -39,7 +39,7 @@ export const loginUser = (data, history) => (dispatch) => {
           type: "alert-success",
         })
       );
-      return history.push("/profile");
+      return history.push("/dashboard");
     })
     .catch((err) => {
       dispatch(errorHandler(err));

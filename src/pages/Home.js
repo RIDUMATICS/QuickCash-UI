@@ -1,10 +1,27 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { calculateLoan } from "../actions/loanActions";
 import AmountInput from "../components/AmountInput";
+import LoadingButton from "../components/LoadingButton";
 import Nav from "../components/Nav";
+import currencyFormat from "../utils/currencyFormatter";
 
 export default function Home() {
+  const dispatch = useDispatch();
   const [amount, setAmount] = useState(0);
+  const [tenor, setTenor] = useState(0);
+  const [installmentPayment, setInstallmentPayment] = useState(null);
+  const [interest, setInterest] = useState(null);
+  const [total, setTotal] = useState(null);
+
+  const handleCalculateLoan = async () => {
+    const data = await dispatch(calculateLoan({ amount, tenor }));
+    console.log(data);
+    setInstallmentPayment(data?.installmentPayment);
+    setInterest(data?.interest);
+    setTotal(data?.total);
+  };
 
   return (
     <div className="relative bg-white overflow-hidden">
@@ -50,20 +67,43 @@ export default function Home() {
             Tenor
           </label>
           <select
+            onChange={(e) => setTenor(e.target.value)}
+            value={tenor}
             className="flex items-center h-12 px-4 w-72 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
             type="password"
           >
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
+            <option value={0} disabled>
+              Select tenor
+            </option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+            <option value={11}>11</option>
+            <option value={12}>12</option>
           </select>
-          <button className="btn-primary mt-7 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+          {interest && (
+            <p className="font-semibold text-xs mt-3">
+              Interest (24%): {currencyFormat(interest)}
+            </p>
+          )}
+          {installmentPayment && (
+            <p className="font-semibold text-xs mt-3">
+              Installment: {currencyFormat(installmentPayment)}
+            </p>
+          )}
+          {total && (
+            <p className="font-semibold text-xs mt-3">
+              Total: {currencyFormat(total)}
+            </p>
+          )}
+          <LoadingButton
+            onClick={handleCalculateLoan}
+            className="btn-primary mt-7 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+          >
             calculate loan
-          </button>
+          </LoadingButton>
         </form>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import { useState } from "react";
 
 const LoadingButton = (props) => {
   const [loading, setLoading] = useState(false);

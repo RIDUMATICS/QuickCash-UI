@@ -1,5 +1,4 @@
 import { GET_ALERT } from "./type";
-import _ from "lodash";
 import { logoutUser } from "./authAction";
 
 export const clearAlert = () => ({

@@ -1,13 +1,12 @@
 import DashboardLayout from "../components/DashboardLayout";
 import { useDispatch, useSelector } from "react-redux";
-import classnames from "classnames";
 import currencyFormat from "../utils/currencyFormatter";
 import dateFormat from "../utils/dateFormat";
 import { useEffect } from "react";
 import { getLoanById } from "../actions/loanActions";
-import { NavLink } from "react-router-dom";
 import { postRepayment } from "../actions/RepaymentAction";
 import Table, { TableCol, TableRow } from "../components/Table";
+import LoadingButton from "../components/LoadingButton";
 
 const LoanDetails = (props) => {
   const dispatch = useDispatch();
@@ -88,12 +87,12 @@ const LoanDetails = (props) => {
               </li>
               {!loan.repaid && (
                 <li className="sm:flex justify-end py-3">
-                  <button
+                  <LoadingButton
                     onClick={handlePostRepayment}
                     className="btn-primary mt-7 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
                   >
                     Process Repayment
-                  </button>
+                  </LoadingButton>
                 </li>
               )}
             </ul>

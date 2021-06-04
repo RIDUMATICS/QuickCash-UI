@@ -1,5 +1,5 @@
 import axios from "axios";
-import { errorHandler, showAlert } from "./alertAction";
+import { errorHandler } from "./alertAction";
 import { SET_PORTFOLIO_VALUE } from "./type";
 
 // Get user portfolio value

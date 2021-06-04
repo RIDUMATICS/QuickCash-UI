@@ -8,6 +8,22 @@ export const createLoan = (data) => (dispatch) => {
     .post("/api/v1/loans", data)
     .then((res) => {
       const { loan } = res.data.data;
+      return loan;
+    })
+    .catch((err) => {
+      dispatch(errorHandler(err));
+    });
+};
+
+// calculate a loan
+export const calculateLoan = (data) => (dispatch) => {
+  return axios
+    .get("/api/v1/loans/calculate", {
+      params: data,
+    })
+    .then((res) => {
+      const { data } = res.data;
+      return data;
     })
     .catch((err) => {
       dispatch(errorHandler(err));

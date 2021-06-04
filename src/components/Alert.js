@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import _ from "lodash";
 
 const Alert = (props) => (
   <div
@@ -10,9 +11,13 @@ const Alert = (props) => (
         props.type === "alert-success",
     })}
   >
-    {props.messages.map((msg) => (
-      <li class="text-md font-bold text-sm">{msg}</li>
-    ))}
+    {_.isArray(props.messages) ? (
+      props.messages.map((msg) => (
+        <li class="text-md font-bold text-sm">{msg}</li>
+      ))
+    ) : (
+      <li class="text-md font-bold text-sm">{props.messages}</li>
+    )}
   </div>
 );
 

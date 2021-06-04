@@ -4,7 +4,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import "./App.css";
 import RootComponent from "./RootComponent";
 import store, { persistor } from "./store";
-import setAuthToken from "./utils/setAuthToken";
 
 function App() {
   axios.defaults.baseURL = "https://quickcash-api.herokuapp.com/";

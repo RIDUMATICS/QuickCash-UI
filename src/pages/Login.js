@@ -62,11 +62,11 @@ function Login(props) {
                     onClick={handleSubmit}
                     className="btn-primary hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
                   >
-                    Sign up
+                    Log in
                   </LoadingButton>
                 </div>
                 <p class="text-sm text-center text-gray-400">
-                  Don&#x27;t have an account yet?{" "}
+                  Don&#x27;t have an account yet?
                   <NavLink
                     to="/signup"
                     class="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800"

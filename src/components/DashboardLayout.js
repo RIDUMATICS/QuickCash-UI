@@ -25,6 +25,10 @@ const DashboardLayout = (props) => {
     dispatch(getPortfolioValue());
   }, [dispatch]);
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+
   return (
     <main className="min-h-screen">
       <div className="flex flex-col md:flex-row min-h-screen bg-gray-900">
@@ -35,7 +39,7 @@ const DashboardLayout = (props) => {
             </button>
             <div className="flex flex-1 justify-end items-center px-4">
               <button
-                onClick={() => dispatch(logoutUser())}
+                onClick={handleLogout}
                 className="flex items-center text-base mr-2 bg-primary text-white rounded-md px-2 py-1"
               >
                 <span className="mr-2">
@@ -106,7 +110,7 @@ const DashboardLayout = (props) => {
         <div className="bg-gray-100 flex-1 relative">
           <div className="fixed md:w-3/4 lg:w-4/5 shadow hidden md:flex justify-end bg-white p-4 min-h-69 border-b z-20">
             <button
-              onClick={() => dispatch(logoutUser())}
+              onClick={handleLogout}
               className="hidden md:flex items-center text-base mr-2 bg-pink-700 text-white rounded-md px-2 py-1"
             >
               <span className="mr-2">
