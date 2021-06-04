@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import "./App.css";
+import RootComponent from "./RootComponent";
+import store, { persistor } from "./store";
+import setAuthToken from "./utils/setAuthToken";
 
 function App() {
+  axios.defaults.baseURL = "http://localhost:5000/";
+
+  axios.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem("token");
+      config.headers = {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+
+      return config;
+    },
+    (error) => {
+      Promise.reject(error);
+    }
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RootComponent />
+      </PersistGate>
+    </Provider>
   );
 }
 
