@@ -7,7 +7,7 @@ import store, { persistor } from "./store";
 import setAuthToken from "./utils/setAuthToken";
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:5000/";
+  axios.defaults.baseURL = "https://quickcash-api.herokuapp.com/";
 
   axios.interceptors.request.use(
     (config) => {
