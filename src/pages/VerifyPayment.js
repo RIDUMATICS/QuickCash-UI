@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IoLogoBuffer } from "react-icons/io";
 import { useDispatch } from "react-redux";
+import { getAllLoans } from "../actions/loanActions";
 import { verifyRepayment } from "../actions/RepaymentAction";
 
 export function Loading() {
@@ -36,6 +37,7 @@ export default function VerifyPayment(props) {
     dispatch(verifyRepayment({ ref })).then((msg) => {
       setMessage(msg);
       setLoading(false);
+      dispatch(getAllLoans());
     });
   }, [dispatch, ref]);
 
